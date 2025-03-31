@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Clase Calculadora
  * 
@@ -60,7 +61,7 @@ class Calculadora
         if ($this->b != 0) {
             return $this->a / $this->b;
         } else {
-            throw new Exception("No se puede dividir entre cero");
+            echo "INVALIDO: No se puede dividir entre cero.  ";
         }
     }
 
