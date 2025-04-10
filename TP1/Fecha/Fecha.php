@@ -64,14 +64,11 @@ class Fecha
         return $this->getDia() . " de " . $meses[$this->getMes() - 1] . " de " . $this->getAnio();
     }
 
-    public function incrementa_un_dia()
-    {
-
-    }
+    public function incrementa_un_dia() {}
 
     public function bisiesto($anio)
     {
-        if(($anio % 4 == 0 && $anio % 100 != 0) || ($anio % 400 == 0)){
+        if (($anio % 4 == 0 && $anio % 100 != 0) || ($anio % 400 == 0)) {
             return true;
         } else {
             return false;
@@ -79,10 +76,33 @@ class Fecha
     }
 
     public function incremento($dias, $fecha)
-    {
+    {   
+        
+        $diasAnio = array(31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
+        $this->bisiesto($fecha->getAnio()) ? $diasAnio[1] = 29 : $diasAnio[1] = 28;
 
+        $diasMesActual = $diasAnio[$fecha->getMes() - 1];
+        $diasRestantes=$dias;
+
+        //TODO: Verificar si el mes es diciembre.
+        //dias - get fecha, pregunto dias menos los das del mes siguiente hasta que dias de cero
+
+        if($fecha->getDia() + $dias > $diasMesActual) {
+            $diasRestantes=$dias - $fecha->getDia();
+            $fecha->setMes($fecha->getMes() + 1);
+        }
+
+      /*  if($fecha->getDia() + $dias > $diasMesActual) {
+            $dias = $dias - ($diasMesActual - $fecha->getDia());
+            $fecha->setDia(1);
+            if($fecha->getMes() == 12) {
+                $fecha->setMes(1);
+                $fecha->setAnio($fecha->getAnio() + 1);
+            } else {
+                $fecha->setMes($fecha->getMes() + 1);
+            }
+        } else {
+            $fecha->setDia($fecha->getDia() + $dias);
+        }*/
     }
-
-   /* $diass=array(31,28,31,30,31,30,31,31,30,31,30,31);
-    $diasBisiesto=array(31,29,31,30,31,30,31,31,30,31,30,31);*/
 }
