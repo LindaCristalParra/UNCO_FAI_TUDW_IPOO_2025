@@ -2,13 +2,15 @@
 class Empresa
 {
     private string $denominacion;
+    private string $direccion;
     private array $clientes = [];
     private array $motos = [];
     private array $ventas = [];
 
-    public function __construct(string $denominacion, array $clientes = [], array $motos = [], array $ventas = [])
+    public function __construct(string $denominacion, string $direccion, array $clientes = [], array $motos = [], array $ventas = [])
     {
         $this->denominacion = $denominacion;
+        $this->direccion = $direccion;
         $this->clientes = $clientes;
         $this->motos = $motos;
         $this->ventas = $ventas;
@@ -17,6 +19,10 @@ class Empresa
     public function getDenominacion(): string
     {
         return $this->denominacion;
+    }
+    public function getDireccion(): string
+    {
+        return $this->direccion;
     }
     public function getClientes(): array
     {
@@ -34,6 +40,10 @@ class Empresa
     {
         $this->denominacion = $denominacion;
     }
+    public function setDireccion(string $direccion): void
+    {
+        $this->direccion = $direccion;
+    }
     public function setClientes(array $clientes): void
     {
         $this->clientes = $clientes;
@@ -50,27 +60,36 @@ class Empresa
 
     public function __toString(): string
     {
-        $clientesInfo = "";
-        foreach ($this->clientes as $cliente) {
-            $clientesInfo .= $cliente->info() . ", ";
-        }
-        $clientesInfo = rtrim($clientesInfo, ", ");
+        $output = "═══════════════════════════════════\n";
+        $output .= "          DETALLE DE EMPRESA          \n";
+        $output .= "═══════════════════════════════════\n";
+        $output .= "Denominación: {$this->denominacion}\n";
+        $output .= "Dirección: {$this->direccion}\n";
+        $output .= "\nCLIENTES:\n";
+        $output .= "-----------------------------------\n";
+        $output .= $this->convertirAstring($this->clientes) . "\n"; 
+        $output .= "\nMOTOS:\n";
+        $output .= "-----------------------------------\n";
+        $output .= $this->convertirAstring($this->motos) . "\n";  
+        $output .= "\nVENTAS:\n";
+        $output .= "-----------------------------------\n";
+        $output .= $this->convertirAstring($this->ventas) . "\n";  
+        $output .= "═══════════════════════════════════\n";
 
-        $motosInfo = "";
-        foreach ($this->motos as $moto) {
-            $motosInfo .= $moto->info() . ", ";
-        }
-        $motosInfo = rtrim($motosInfo, ", ");
+        return $output;
+    }
 
-        $ventasInfo = "";
-        foreach ($this->ventas as $venta) {
-            $ventasInfo .= $venta->info() . ", ";
+    private function convertirAstring($array): string
+    {
+        $output="";
+        if (empty($this->$array)) {
+            $output .= "No hay elementos.\n";
+        } else {
+            foreach ($array as $i => $objeto) {
+                $output .= "#" . ($i + 1) . ":\n";
+                $output .= $objeto . "\n";
+            }
         }
-        $ventasInfo = rtrim($ventasInfo, ", ");
-
-        return "Empresa: {$this->denominacion}\n" .
-            "Clientes: [{$clientesInfo}]\n" .
-            "Motos: [{$motosInfo}]\n" .
-            "Ventas: [{$ventasInfo}]";
+        return $output;
     }
 }
