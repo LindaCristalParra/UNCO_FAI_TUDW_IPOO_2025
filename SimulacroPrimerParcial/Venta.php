@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Class Venta
  * @param int $numero Número de la venta.
@@ -28,7 +29,7 @@ class Venta
     public function getNumero(): int
     {
         return $this->numero;
-    }   
+    }
     public function getFecha(): DateTime
     {
         return $this->fecha;
@@ -68,18 +69,35 @@ class Venta
 
     public function __toString(): string
     {
-        $motosInfo = "";
-        foreach ($this->motos as $moto) {
-            $motosInfo .= (string)$moto . ", ";
+        $output = "═══════════════════════════════════\n";
+        $output .= "          DETALLE DE VENTA          \n";
+        $output .= "═══════════════════════════════════\n";
+        $output .= "Número: {$this->numero}\n";
+        $output .= "Fecha: {$this->fecha->format('d/m/Y H:i')}\n";
+        
+        $output .= "\nCLIENTE:\n";
+        $output .= "-----------------------------------\n";
+        $output .= $this->cliente . "\n";  // Usa el __toString() de Cliente
+        
+        $output .= "\nMOTOS:\n";
+        $output .= "-----------------------------------\n";
+        
+        if (empty($this->motos)) {
+            $output .= "No hay motos en esta venta.\n";
+        } else {
+            foreach ($this->motos as $index => $moto) {
+                $output .= "Moto #" . ($index + 1) . ":\n";
+                $output .= $moto . "\n";  // Usa el __toString() de Moto
+            }
         }
-        $motosInfo = rtrim($motosInfo, ", ");
-        return "Venta Número: {$this->numero}\n" .
-               "Fecha: {$this->fecha->format('d/m/Y')}\n" .
-               "Cliente: {$this->cliente}\n" .
-               "Motos: {$motosInfo}\n" .
-               "Precio Final: {$this->precioFinal}";
+        
+        $output .= "\nTOTAL:\n";
+        $output .= "-----------------------------------\n";
+        $output .= "$ " . $this->precioFinal . "\n";
+        $output .= "═══════════════════════════════════\n";
+        
+        return $output;
     }
-
     /**
      * Implementar el método incorporarMoto($objMoto) que recibe por parámetro un objeto moto y lo
      * incorpora a la colección de motos de la venta, siempre y cuando sea posible la venta. El método cada
@@ -88,7 +106,7 @@ class Venta
      */
     public function incorporarMoto(Moto $objMoto): bool
     {
-        if ($objMoto->calcularValorVenta()!=-1) {
+        if ($objMoto->calcularValorVenta() != -1) {
             $this->motos[] = $objMoto;
             $this->precioFinal += $objMoto->calcularValorVenta();
             return true;
