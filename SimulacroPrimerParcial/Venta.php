@@ -106,9 +106,9 @@ class Venta
      */
     public function incorporarMoto(Moto $objMoto): bool
     {
-        if ($objMoto->calcularValorVenta() != -1) {
+        if ($objMoto->darPrecioVenta() != -1) {
             $this->motos[] = $objMoto;
-            $this->precioFinal += $objMoto->calcularValorVenta();
+            $this->precioFinal += $objMoto->darPrecioVenta();
             return true;
         }
         return false;
