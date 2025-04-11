@@ -118,8 +118,10 @@ class Empresa
         if (!empty($motosVendidas)) {
             $venta = new Venta(count($this->ventas) + 1, new DateTime(), $cliente, $motosVendidas, $precioFinal);
             $this->ventas[] = $venta;
-            return $precioFinal; // Retorna el precio total de la venta
         }
+
+        return $precioFinal; // Retorna el precio total de la venta
+
     }
 
     public function retornarVentasXCliente(string $tipoDoc,int $numDoc): array

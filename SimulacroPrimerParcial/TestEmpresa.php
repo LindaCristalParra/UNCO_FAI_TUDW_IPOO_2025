@@ -42,18 +42,27 @@ y la colección de códigos de motos es la siguiente [0]. Visualizar el resultad
 echo "***Estado moto 0\n ".$objMoto1->__toString()."\n\n";
 //echo "colección con un elemento, no disponible".$objEmpresa->__toString()."No se puede realizar la venta\n\n";
 echo"-----------------------------------\n\n";
-echo"--Consigna 6\n\n";
+echo"--Consigna 7\n\n";
 echo"Invocar al método registrarVenta($ colCodigosMotos, $ bjCliente) de la Clase Empresa donde el $ objCliente es una referencia a la clase Cliente almacenada en la variable $ objCliente2 (creada en el punto 1) 
 y la colección de códigos de motos es la siguiente [2]. Visualizar el resultado obtenido.
 \n\n";
-$objEmpresa->registrarVenta([2], $objCliente2);
-echo "*** Registrar venta Empresa punto 6 ***\n\n ".$objEmpresa->__toString()."\n\n"; 
+$venta =$objEmpresa->registrarVenta([2], $objCliente2);
+echo "*** Registrar venta Empresa punto 7 ***\n\n ".$venta."\n\n"; 
 echo"-----------------------------------\n\n";
-echo"--Consigna 7\n\n";
+echo"--Consigna 8\n\n";
 echo"Invocar al método retornarVentasXCliente($ tipo,$ numDoc) donde el tipo y número de documento se corresponden con el tipo y número de documento del $ objCliente1.\n\n";
 $objEmpresa->retornarVentasXCliente($objCliente1->getTipoDoc(),$objCliente1->getNumDoc());
-echo "*** Ventas por cliente ***\n\n ";
+
 echo"-----------------------------------\n\n";
+echo"--Consigna 9\n\n";
+echo"Invocar al método retornarVentasXCliente($ tipo,$ numDoc) donde el tipo y número de documento se corresponden con el tipo y número de documento del $ objCliente2\n\n";
+$objEmpresa->retornarVentasXCliente($objCliente2->getTipoDoc(),$objCliente1->getNumDoc());
+echo"-----------------------------------\n\n";
+echo"--Consigna 10\n\n";
+echo"Realizar un echo de la variable Empresa creada en 2.\n\n";
+echo"*** Empresa 1 ***\n\n ".$objEmpresa->__toString()."\n\n";
+echo"-----------------------------------\n\n";
+
 
 
 
