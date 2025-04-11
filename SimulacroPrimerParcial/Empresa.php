@@ -122,7 +122,7 @@ class Empresa
         }
     }
 
-    public function retornarVentasXCliente(string $tipoDoc,int $numDoc): 
+    public function retornarVentasXCliente(string $tipoDoc,int $numDoc): array
     {
 
         $ventasCliente = [];
