@@ -57,7 +57,13 @@ class Cliente
     }
     public function __toString(): string
     {
-        return "Nombre: " . $this->nombre . ", Apellido: " . $this->apellido . ", Tipo de Documento: " . $this->tipoDoc . ", Numero de Documento: " . $this->numDoc . ", Alta: " . ($this->alta ? 'Si' : 'No');
+        $output = "Nombre: {$this->nombre}\n";
+        $output .= "Apellido: {$this->apellido}\n";
+        $output .= "Tipo de Documento: {$this->tipoDoc}\n";
+        $output .= "Número de Documento: {$this->numDoc}\n";
+        $output .= "Alta: " . ($this->alta ? 'Si' : 'No') . "\n";
+
+        return $output;
     }
     public function __destruct()
     {
