@@ -74,7 +74,6 @@ class Empresa
         $output .= "\nVENTAS:\n";
         $output .= "-----------------------------------\n";
         $output .= $this->convertirAstring($this->ventas) . "\n";
-        $output .= "═══════════════════════════════════\n";
 
         return $output;
     }
