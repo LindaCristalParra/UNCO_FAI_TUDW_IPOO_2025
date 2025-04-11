@@ -103,7 +103,7 @@ class Empresa
         return null; // Retorna null si no se encuentra la moto
     }
 
-    public function registrarVenta(array $codMoto, Cliente $cliente): void
+    public function registrarVenta(array $codMoto, Cliente $cliente): float
     {
         $motosVendidas = [];
         $precioFinal = 0;
@@ -118,10 +118,11 @@ class Empresa
         if (!empty($motosVendidas)) {
             $venta = new Venta(count($this->ventas) + 1, new DateTime(), $cliente, $motosVendidas, $precioFinal);
             $this->ventas[] = $venta;
+            return $precioFinal; // Retorna el precio total de la venta
         }
     }
 
-    public function retornarVentasXCliente(string $tipoDoc,int $numDoc): array
+    public function retornarVentasXCliente(string $tipoDoc,int $numDoc): 
     {
 
         $ventasCliente = [];
