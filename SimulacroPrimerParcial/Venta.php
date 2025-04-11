@@ -18,7 +18,7 @@ class Venta
 
     private float $precioFinal;
 
-    public function __construct(int $numero, DateTime $fecha, Cliente $cliente, array $motos = [], float $precioFinal)    
+    public function __construct(int $numero, DateTime $fecha, Cliente $cliente, array $motos = [], float $precioFinal= 0.0)    
     {
         $this->numero = $numero;
         $this->fecha = $fecha;

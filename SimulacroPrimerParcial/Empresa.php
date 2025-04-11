@@ -79,13 +79,13 @@ class Empresa
         return $output;
     }
 
-    private function convertirAstring($array): string
+    private function convertirAstring(array $miArray): string
     {
         $output = "";
-        if (empty($this->$array)) {
+        if (empty($miArray)) {
             $output .= "No hay elementos.\n";
         } else {
-            foreach ($array as $i => $objeto) {
+            foreach ($miArray as $i => $objeto) {
                 $output .= "#" . ($i + 1) . ":\n";
                 $output .= $objeto . "\n";
             }
