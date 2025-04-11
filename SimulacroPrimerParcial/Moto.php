@@ -21,7 +21,7 @@ class Moto
     {
         return $this->codigo;
     }
-    public function getCosto(): int
+    public function getCosto(): float
     {
         return $this->costo;
     }

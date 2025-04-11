@@ -67,13 +67,13 @@ class Empresa
         $output .= "Dirección: {$this->direccion}\n";
         $output .= "\nCLIENTES:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->convertirAstring($this->clientes) . "\n"; 
+        $output .= $this->convertirAstring($this->clientes) . "\n";
         $output .= "\nMOTOS:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->convertirAstring($this->motos) . "\n";  
+        $output .= $this->convertirAstring($this->motos) . "\n";
         $output .= "\nVENTAS:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->convertirAstring($this->ventas) . "\n";  
+        $output .= $this->convertirAstring($this->ventas) . "\n";
         $output .= "═══════════════════════════════════\n";
 
         return $output;
@@ -81,7 +81,7 @@ class Empresa
 
     private function convertirAstring($array): string
     {
-        $output="";
+        $output = "";
         if (empty($this->$array)) {
             $output .= "No hay elementos.\n";
         } else {
@@ -91,5 +91,45 @@ class Empresa
             }
         }
         return $output;
+    }
+
+    public function retornarMoto(int $codigo): ?Moto
+    {
+        foreach ($this->motos as $moto) {
+            if ($moto->getCodigo() === $codigo) {
+                return $moto;
+            }
+        }
+        return null; // Retorna null si no se encuentra la moto
+    }
+
+    public function registrarVenta(array $codMoto, Cliente $cliente): void
+    {
+        $motosVendidas = [];
+        $precioFinal = 0;
+        foreach ($codMoto as $codigo) {
+            $moto = $this->retornarMoto($codigo);
+            if ($moto !== null && $moto->getActiva()) {
+                $motosVendidas[] = $moto;
+                $precioFinal += $moto->getCosto();
+                $moto->setActiva(false); // Desactiva la moto después de la venta
+            }
+        }
+        if (!empty($motosVendidas)) {
+            $venta = new Venta(count($this->ventas) + 1, new DateTime(), $cliente, $motosVendidas, $precioFinal);
+            $this->ventas[] = $venta;
+        }
+    }
+
+    public function retornarVentasXCliente(string $tipoDoc,int $numDoc): array
+    {
+
+        $ventasCliente = [];
+        foreach ($this->ventas as $venta) {
+            if ($venta->getCliente()->getTipoDoc() === $tipoDoc && $venta->getCliente()->getNumDoc() === $numDoc) {
+                $ventasCliente[] = $venta;
+            }
+        }
+        return $ventasCliente;
     }
 }
