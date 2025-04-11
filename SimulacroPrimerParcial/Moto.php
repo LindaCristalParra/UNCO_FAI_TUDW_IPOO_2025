@@ -68,12 +68,12 @@ class Moto
     
     public function __toString(): string
     {
-        $output = "Código: {$this->codigo}\n";
-        $output .= "Costo: \$" . number_format($this->costo, 2)."\n";
-        $output .= "Año de Fabricación:  {$this->anioFabric}\n";
-        $output .= "Descripción: {$this->descripcion}\n";
-        $output .= "Incremento Anual:". ($this->porcentajeIncAnual * 100) . "%\n";
-        $output .= "Disponible: " . ($this->activa ? "Si" : "No") . "\n";
+        $output = "Código: {$this->getCodigo()}\n";
+        $output .= "Costo: \$" . number_format($this->getCosto(), 2)."\n";
+        $output .= "Año de Fabricación:  {$this->getAnioFabric()}\n";
+        $output .= "Descripción: {$this->getDescripcion()}\n";
+        $output .= "Incremento Anual:". ($this->getPorcentajeIncAnual() * 100) . "%\n";
+        $output .= "Disponible: " . ($this->getActiva() ? "Si" : "No") . "\n";
 
         return $output;
     }
