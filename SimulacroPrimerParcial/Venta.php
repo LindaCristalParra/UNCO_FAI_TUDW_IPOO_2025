@@ -72,20 +72,20 @@ class Venta
         $output = "═══════════════════════════════════\n";
         $output .= "          DETALLE DE VENTA          \n";
         $output .= "═══════════════════════════════════\n";
-        $output .= "Número: {$this->numero}\n";
-        $output .= "Fecha: {$this->fecha->format('d/m/Y H:i')}\n";
+        $output .= "Número: {$this->getNumero()}\n";
+        $output .= "Fecha: {$this->getFecha()->format('d/m/Y H:i')}\n";
         
         $output .= "\nCLIENTE:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->cliente . "\n";  // Usa el __toString() de Cliente
+        $output .= $this->getCliente() . "\n";  // Usa el __toString() de Cliente
         
         $output .= "\nMOTOS:\n";
         $output .= "-----------------------------------\n";
         
-        if (empty($this->motos)) {
+        if (empty($this->getMotos())) {
             $output .= "No hay motos en esta venta.\n";
         } else {
-            foreach ($this->motos as $index => $moto) {
+            foreach ($this->getMotos() as $index => $moto) {
                 $output .= "Moto #" . ($index + 1) . ":\n";
                 $output .= $moto . "\n";  // Usa el __toString() de Moto
             }
@@ -93,7 +93,7 @@ class Venta
         
         $output .= "\nTOTAL:\n";
         $output .= "-----------------------------------\n";
-        $output .= "$ " . $this->precioFinal . "\n";
+        $output .= "$ " . $this->getPrecioFinal() . "\n";
         $output .= "═══════════════════════════════════\n";
         
         return $output;
@@ -108,7 +108,7 @@ class Venta
     {
         if ($objMoto->darPrecioVenta() != -1) {
             $this->motos[] = $objMoto;
-            $this->precioFinal += $objMoto->darPrecioVenta();
+            $this->precioFinal += $objMoto->darPrecioVenta();//ver
             return true;
         }
         return false;
