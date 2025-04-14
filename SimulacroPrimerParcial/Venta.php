@@ -108,9 +108,10 @@ class Venta
     {
         if ($objMoto->darPrecioVenta() != -1) {
             $this->motos[] = $objMoto;
-            $this->precioFinal += $objMoto->darPrecioVenta();//ver
+            $this->setPrecioFinal($this->getPrecioFinal() + $objMoto->darPrecioVenta()) ;
             return true;
         }
         return false;
     }
 }
+?>
