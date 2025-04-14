@@ -72,12 +72,12 @@ class Venta
         $output = "═══════════════════════════════════\n";
         $output .= "          DETALLE DE VENTA          \n";
         $output .= "═══════════════════════════════════\n";
-        $output .= "Número: {$this->numero}\n";
-        $output .= "Fecha: {$this->fecha->format('d/m/Y H:i')}\n";
+        $output .= "Número: {$this->getNumero()}\n";
+        $output .= "Fecha: {$this->getFecha()->format('d/m/Y H:i')}\n";
         
         $output .= "\nCLIENTE:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->cliente . "\n";  // Usa el __toString() de Cliente
+        $output .= $this->getCliente() . "\n";  // Usa el __toString() de Cliente
         
         $output .= "\nMOTOS:\n";
         $output .= "-----------------------------------\n";
@@ -93,7 +93,7 @@ class Venta
         
         $output .= "\nTOTAL:\n";
         $output .= "-----------------------------------\n";
-        $output .= "$ " . $this->precioFinal . "\n";
+        $output .= "$ " . $this->getPrecioFinal() . "\n";
         $output .= "═══════════════════════════════════\n";
         
         return $output;
@@ -106,11 +106,12 @@ class Venta
      */
     public function incorporarMoto(Moto $objMoto): bool
     {
-        if ($objMoto->calcularValorVenta() != -1) {
+        if ($objMoto->darPrecioVenta() != -1) {
             $this->motos[] = $objMoto;
-            $this->precioFinal += $objMoto->calcularValorVenta();
+            $this->setPrecioFinal($this->getPrecioFinal() + $objMoto->darPrecioVenta()) ;
             return true;
         }
         return false;
     }
 }
+?>

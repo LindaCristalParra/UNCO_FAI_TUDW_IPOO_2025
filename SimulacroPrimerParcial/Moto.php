@@ -28,15 +28,15 @@ class Moto
     public function getAnioFabric(): int
     {
         return $this->anioFabric;
-    }   
+    }
     public function getDescripcion(): string
     {
         return $this->descripcion;
-    }   
+    }
     public function getPorcentajeIncAnual(): float
     {
         return $this->porcentajeIncAnual;
-    }   
+    }
     public function getActiva(): bool
     {
         return $this->activa;
@@ -65,15 +65,15 @@ class Moto
     {
         $this->activa = $activa;
     }
-    
+
     public function __toString(): string
     {
-        $output = "Código: {$this->codigo}\n";
-        $output .= "Costo: \$" . number_format($this->costo, 2)."\n";
-        $output .= "Año de Fabricación:  {$this->anioFabric}\n";
-        $output .= "Descripción: {$this->descripcion}\n";
-        $output .= "Incremento Anual:". ($this->porcentajeIncAnual * 100) . "%\n";
-        $output .= "Disponible: " . ($this->activa ? "Si" : "No") . "\n";
+        $output = "Código: {$this->getCodigo()}\n";
+        $output .= "Costo: \$" . number_format($this->getCosto(), 2) . "\n";
+        $output .= "Año de Fabricación:  {$this->getAnioFabric()}\n";
+        $output .= "Descripción: {$this->getDescripcion()}\n";
+        $output .= "Incremento Anual:" . ($this->getPorcentajeIncAnual() * 100) . "%\n";
+        $output .= "Disponible: " . ($this->getActiva() ? "Si" : "No") . "\n";
 
         return $output;
     }
@@ -91,14 +91,12 @@ class Moto
      * - anio: Cantidad de años transcurridos desde que se fabricó la moto.
      * - por_inc_anual: Porcentaje de incremento anual de la moto.
      */
-    public function calcularValorVenta(): float
+    public function darPrecioVenta(): float
     {
-        if ($this->activa) {
-           return $this->costo + ($this->costo * ($this->anioFabric * $this->porcentajeIncAnual));
-
+        if ($this->getActiva()) {
+            return $this->getCosto() + ($this->getCosto() * ((date("Y") - $this->getAnioFabric()) * $this->getPorcentajeIncAnual()));
         } else {
             return -1; // Moto no disponible para la venta
         }
     }
 }
-    

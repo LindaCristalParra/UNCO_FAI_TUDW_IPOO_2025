@@ -3,8 +3,11 @@ class Empresa
 {
     private string $denominacion;
     private string $direccion;
+    /** @var Cliente[] */
     private array $clientes = [];
+    /** @var Moto[] */
     private array $motos = [];
+    /** @var Venta[] */
     private array $ventas = [];
 
     public function __construct(string $denominacion, string $direccion, array $clientes = [], array $motos = [], array $ventas = [])
@@ -56,28 +59,25 @@ class Empresa
     {
         $this->ventas = $ventas;
     }
-
-
     public function __toString(): string
     {
         $output = "═══════════════════════════════════\n";
         $output .= "          DETALLE DE EMPRESA          \n";
         $output .= "═══════════════════════════════════\n";
-        $output .= "Denominación: {$this->denominacion}\n";
-        $output .= "Dirección: {$this->direccion}\n";
+        $output .= "Denominación: {$this->getDenominacion()}\n";
+        $output .= "Dirección: {$this->getDireccion()}\n";
         $output .= "\nCLIENTES:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->convertirAstring($this->clientes) . "\n";
+        $output .= $this->convertirAstring($this->getClientes()) . "\n";
         $output .= "\nMOTOS:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->convertirAstring($this->motos) . "\n";
+        $output .= $this->convertirAstring($this->getMotos()) . "\n";
         $output .= "\nVENTAS:\n";
         $output .= "-----------------------------------\n";
-        $output .= $this->convertirAstring($this->ventas) . "\n";
+        $output .= $this->convertirAstring($this->getVentas()) . "\n";
 
         return $output;
     }
-
     private function convertirAstring(array $miArray): string
     {
         $output = "";
@@ -91,7 +91,6 @@ class Empresa
         }
         return $output;
     }
-
     public function retornarMoto(int $codigo): ?Moto
     {
         foreach ($this->motos as $moto) {
@@ -101,9 +100,12 @@ class Empresa
         }
         return null; // Retorna null si no se encuentra la moto
     }
-
     public function registrarVenta(array $codMoto, Cliente $cliente): float
     {
+        // Verifica si el cliente está activo
+        if (!$cliente->getAlta()) {
+            return 0; // No se puede registrar la venta si el cliente no está activo
+        }
         $motosVendidas = [];
         $precioFinal = 0;
         foreach ($codMoto as $codigo) {
@@ -115,23 +117,23 @@ class Empresa
             }
         }
         if (!empty($motosVendidas)) {
-            $venta = new Venta(count($this->ventas) + 1, new DateTime(), $cliente, $motosVendidas, $precioFinal);
-            $this->ventas[] = $venta;
+            $venta = new Venta(count($this->getVentas()) + 1, new DateTime(), $cliente, $motosVendidas, $precioFinal);
+            foreach ($motosVendidas as $moto) {
+                $venta->incorporarMoto($moto);
+            }
         }
-
-        return $precioFinal; // Retorna el precio total de la venta
-
+        return $venta->getPrecioFinal(); // Retorna el precio total de la venta
     }
-
-    public function retornarVentasXCliente(string $tipoDoc,int $numDoc): array
+    public function retornarVentasXCliente(string $tipoDoc, int $numDoc): array
     {
 
         $ventasCliente = [];
-        foreach ($this->ventas as $venta) {
-            if ($venta->getCliente()->getTipoDoc() === $tipoDoc && $venta->getCliente()->getNumDoc() === $numDoc) {
+        foreach ($this->getVentas() as $venta) {
+            if (($venta->getCliente())->getTipoDoc() === $tipoDoc && ($venta->getCliente())->getNumDoc() === $numDoc) {
                 $ventasCliente[] = $venta;
             }
         }
         return $ventasCliente;
     }
 }
+?>
