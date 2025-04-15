@@ -107,26 +107,29 @@ class Empresa
             return 0; // No se puede registrar la venta si el cliente no está activo
         }
         $motosVendidas = [];
-        $precioFinal = 0;
         foreach ($codMoto as $codigo) {
             $moto = $this->retornarMoto($codigo);
             if ($moto !== null && $moto->getActiva()) {
                 $motosVendidas[] = $moto;
-                $precioFinal += $moto->getCosto();
-                $moto->setActiva(false); // Desactiva la moto después de la venta
             }
         }
         if (!empty($motosVendidas)) {
-            $venta = new Venta(count($this->getVentas()) + 1, new DateTime(), $cliente, $motosVendidas, $precioFinal);
+            $nuevaVenta = new Venta(count($this->getVentas()) + 1, new DateTime(), $cliente, [], 0);
             foreach ($motosVendidas as $moto) {
-                $venta->incorporarMoto($moto);
+                $nuevaVenta->incorporarMoto($moto);
+                $moto->setActiva(false); // Desactiva la moto después de la venta
             }
+            array_push($this->ventas, $nuevaVenta);
+
+            return $nuevaVenta->getPrecioFinal();
+        } else {
+            return 0; // No se pudo registrar la venta
+
         }
-        return $venta->getPrecioFinal(); // Retorna el precio total de la venta
     }
+
     public function retornarVentasXCliente(string $tipoDoc, int $numDoc): array
     {
-
         $ventasCliente = [];
         foreach ($this->getVentas() as $venta) {
             if (($venta->getCliente())->getTipoDoc() === $tipoDoc && ($venta->getCliente())->getNumDoc() === $numDoc) {
@@ -136,4 +139,3 @@ class Empresa
         return $ventasCliente;
     }
 }
-?>

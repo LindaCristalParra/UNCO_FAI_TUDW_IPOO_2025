@@ -82,14 +82,12 @@ class Venta
         $output .= "\nMOTOS:\n";
         $output .= "-----------------------------------\n";
         
-        if (empty($this->motos)) {
-            $output .= "No hay motos en esta venta.\n";
-        } else {
+   
             foreach ($this->motos as $index => $moto) {
                 $output .= "Moto #" . ($index + 1) . ":\n";
                 $output .= $moto . "\n";  // Usa el __toString() de Moto
             }
-        }
+        
         
         $output .= "\nTOTAL:\n";
         $output .= "-----------------------------------\n";

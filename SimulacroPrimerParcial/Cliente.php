@@ -1,4 +1,4 @@
-<?
+<?php
 class Cliente
 {
     private string $nombre;
@@ -59,8 +59,7 @@ class Cliente
     {
         $output = "Nombre: {$this->getNombre()}\n";
         $output .= "Apellido: {$this->getApellido()}\n";
-        $output .= "Tipo de Documento: {$this->getTipoDoc()}: ";
-        $output .= "Número de Documento: {$this->getNumDoc()}\n";
+        $output .= "Tipo y nro de Documento: {$this->getTipoDoc()}: {$this->getNumDoc()}\n";
         $output .= "Alta: " . ($this->getAlta() ? 'Si' : 'No') . "\n";
 
         return $output;
