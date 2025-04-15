@@ -96,7 +96,3 @@ Un banco desea gestionar información de préstamos y cuotas. Se implementarán 
 11. Volver a llamar `_informarCuotaPagar(2)` y mostrar la nueva cuota.  
 
 ---
-
-**Nota:**  
-- Los métodos con `_` (como `_otorgarPrestamo`) son privados/protegidos.  
-- Asegúrate de incluir `<?php` al inicio de cada archivo de clase.  

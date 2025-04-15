@@ -2,8 +2,11 @@
 class Prestamo
 {
     private int $identificacion;
+    private DateTime $fecha_otorgamiento;
     private float $monto;
     private int $cantidad_de_cuotas;
+    /** @var Cuota[] */
+    private array $cuotas = [];
     private float $taza_interes;
     private Persona $persona;
 
@@ -26,6 +29,11 @@ class Prestamo
         return $this->identificacion;
     }
 
+    public function getFechaOtorgamiento(): DateTime
+    {
+        return $this->fecha_otorgamiento;
+    }
+
     public function getMonto(): float
     {
         return $this->monto;
@@ -34,6 +42,10 @@ class Prestamo
     public function getCantidadDeCuotas(): int
     {
         return $this->cantidad_de_cuotas;
+    }
+    public function getCuotas(): array
+    {
+        return $this->cuotas;
     }
 
     public function getTazaInteres(): float
@@ -51,6 +63,11 @@ class Prestamo
         $this->identificacion = $identificacion;
     }
 
+    public function setFechaOtorgamiento(DateTime $fecha_otorgamiento): void
+    {
+        $this->fecha_otorgamiento = $fecha_otorgamiento;
+    }
+
     public function setMonto(float $monto): void
     {
         $this->monto = $monto;
@@ -59,6 +76,11 @@ class Prestamo
     public function setCantidadDeCuotas(int $cantidad_de_cuotas): void
     {
         $this->cantidad_de_cuotas = $cantidad_de_cuotas;
+    }
+
+    public function setCuotas(array $cuotas): void
+    {
+        $this->cuotas = $cuotas;
     }
 
     public function setTazaInteres(float $taza_interes): void
@@ -78,24 +100,52 @@ class Prestamo
         $output .= "Identificación: {$this->getIdentificacion()}\n";
         $output .= "Monto: {$this->getMonto()}\n";
         $output .= "Cantidad de Cuotas: {$this->getCantidadDeCuotas()}\n";
-        $output .= "Taza de Interés: {$this->getTazaInteres()}\n";
-        //$output .= "Persona: \n";
+        $output .= "\CUOTAS:\n";
+        $output .= "-----------------------------------\n";
+        $output .= $this->convertirAstring($this->getCuotas()) . "\n";
+        $output .= "Persona:{$this->getPersona()} \n";
 
         return $output;
     }
-    private function calcularInteresPrestamo(int $numCuota)
+
+    private function convertirAstring(array $miArray): string
     {
-        /*TODO: Calcula intereses sobre saldo deudor.  
-        Ejemplo:  
-        Cuota 1: 50,000 * 0.01 = 500  
-        Cuota 2: (50,000 - (50,000/5)) * 0.01 = 400 .
-        */
+        $output = "";
+        if (empty($miArray)) {
+            $output .= "No hay elementos.\n";
+        } else {
+            foreach ($miArray as $i => $objeto) {
+                $output .= "#" . ($i + 1) . ":\n";
+                $output .= $objeto . "\n";
+            }
+        }
+        return $output;
     }
-    public function otorgarPrestamo() {
-        //TODO: Establece `fecha_otorgamiento` (fecha actual).  
-        //Genera cuotas con `monto_cuota = monto / cantidad_de_cuotas` + intereses.
+
+    private function calcularInteresPrestamo(int $numCuota): float
+    {
+        $interesCuota = ($this->getMonto() - (($this->getMonto() / count($this->getCuotas())) * ($numCuota - 1))) * $this->getTazaInteres() / 0.01;
+        return $interesCuota;
     }
-    public function darSiguienteCuotaPagar(){
-        //TODO: Retorna la próxima cuota no cancelada. Si todas están pagas, retorna `null`
+
+    public function otorgarPrestamo():void
+    {
+        $this->setFechaOtorgamiento(new DateTime());
+        for ($i = 1; $i <= $this->getCantidadDeCuotas(); $i++) {            
+            $cuota = new Cuota($i, ($this->getMonto()/$this->getCantidadDeCuotas()) , $this->calcularInteresPrestamo($i));
+            $this->cuotas[] = $cuota;
+        }
+        $this->setCuotas($this->cuotas);
     }
-}   
+
+    public function darSiguienteCuotaPagar(): ?Cuota
+    {
+        foreach ($this->getCuotas() as $cuota) {
+            if (!$cuota->isCancelada()) {
+                return $cuota;
+            }
+        }
+        return null;
+    }
+}
+?>
