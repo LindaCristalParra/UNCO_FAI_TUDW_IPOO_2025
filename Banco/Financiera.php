@@ -1,8 +1,11 @@
 <?php
+include_once 'Prestamo.php';
+include_once 'Cuota.php';
 class Financiera
 {
     private string $denominacion;
     private string $direccion;
+    /** @var Prestamo[] */
     private array $coleccion_prestamos;
 
     public function __construct(string $denominacion, string $direccion, array $coleccion_prestamos)
@@ -68,14 +71,45 @@ class Financiera
         }
         return $output;
     }
-    public function incorporarPrestamo($préstamo){
-        //TODO:Agrega un préstamo a la colección.
+    public function incorporarPrestamo(Prestamo $nuevoPrestamo): void
+    {
+        $prestamos=$this->getColeccionPrestamos();
+        array_push($prestamos, $nuevoPrestamo);
+        $this->setColeccionPrestamos($prestamos);
     }
-    public function otorgarPrestamoSiCalifica(){
-        //TODO:Verifica que el monto por cuota no supere el 40% del `neto` del solicitante.  
-        //- Si cumple, invoca `_otorgarPrestamo()*Clase Prestamo*`
+
+    public function otorgarPrestamoSiCalifica():array
+    {
+    /**Implementar el método otorgarPrestamoSiCalifica, método que recorre la lista de préstamos que no
+        han sido generadas sus cuotas. Por cada préstamo, se corrobora que su monto dividido la
+        cantidad_de_cuotas no supere el 40 % del neto del solicitante, si la verificación es satisfactoria se invoca
+        al método otorgarPrestamo.
+    */
+        foreach ($this->getColeccionPrestamos() as $prestamo) {
+            if ($prestamo->getCuotas() == null) {
+                $montoCuota = $prestamo->getMonto() / $prestamo->getCantidadDeCuotas();
+                // Verifica si el monto de la cuota no supera el 40% del neto del solicitante
+                $solicitante = $prestamo->getPersona();
+                $montoNeto= $solicitante->getNeto() * 0.4;
+                if ($montoCuota <= $montoNeto) {
+                    $prestamo->otorgarPrestamo();
+                    // Agregar el préstamo a la colección de préstamos
+                    $this->incorporarPrestamo($prestamo);
+                }                
+            }
+        }
+        return $this->getColeccionPrestamos();
     }
-    public function informarCuotaPagar($idPrestamo){
-        //TODO:Retorna la próxima cuota a pagar del préstamo (usa `darSiguienteCuotaPagar`*Clase Prestamo*).  
+    public function informarCuotaPagar($idPrestamo)
+    {
+        /**Implementar el método informarCuotaPagar(idPrestamo) que recibe por parámetro la identificación del
+        préstamo, se busca el préstamo en la colección de prestamos y si es encontrado se obtiene la siguiente
+        cuota a pagar. El método debe retornar la referencia a la cuota. Utilizar para su implementación el
+        método darSiguienteCuotaPagar */
+        foreach ($this->getColeccionPrestamos() as $prestamo) {
+            if ($prestamo->getIdentificacion() == $idPrestamo) {
+                return $prestamo->darSiguienteCuotaPagar();
+            }
+        }
     }
 }
