@@ -109,7 +109,7 @@ class Aeropuerto
         $promedio = 0;
         $colAerolineas = $this->getAerolineas();
         $cont = 0;
-        while ($promedio != 0) {
+        while ($promedio != 0 && $cont < count($colAerolineas)) {
             if ($colAerolineas[$cont]->getIdentificacion() == $identificacion) {
                 $promedio = $colAerolineas[$cont]->montoPromedioRecaudado();
             }
