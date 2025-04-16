@@ -11,20 +11,20 @@ los métodos de acceso de cada uno de los atributos de la clase. */
 class Vuelo{
     private int $numero;
     private float $importe;
-    private date $fecha;
+    private DateTime $fecha;
     private string $destino;
-    private date $horaArribo;
-    private date $horaPartida;
+    private DateTime $horaArribo;
+    private DateTime $horaPartida;
     private int $asientosTotales;
     private int $asientosDisponibles;
     private Persona $responsable;
 
     public function __construct(int $numero, 
                                 float $importe, 
-                                date $fecha, 
+                                DateTime $fecha, 
                                 string $destino, 
-                                date $horaArribo, 
-                                date $horaPartida, 
+                                DateTime $horaArribo, 
+                                DateTime $horaPartida, 
                                 int $asientosTotales, 
                                 int $asientosDisponibles, 
                                 Persona $responsable)
@@ -46,16 +46,16 @@ class Vuelo{
     public function getImporte(): float{
         return $this->importe;
     }
-    public function getFecha(): date{
+    public function getFecha(): DateTime{
         return $this->fecha;
     }
     public function getDestino(): string{
         return $this->destino;
     }
-    public function getHoraArribo(): date{
+    public function getHoraArribo(): DateTime{
         return $this->horaArribo;
     }
-    public function getHoraPartida(): date{
+    public function getHoraPartida(): DateTime{
         return $this->horaPartida;
     }
     public function getAsientosTotales(): int{
@@ -73,16 +73,16 @@ class Vuelo{
     public function setImporte(float $importe): void{
         $this->importe = $importe;
     }
-    public function setFecha(date $fecha): void{
+    public function setFecha(DateTime $fecha): void{
         $this->fecha = $fecha;
     }
     public function setDestino(string $destino): void{
         $this->destino = $destino;
     }
-    public function setHoraArribo(date $horaArribo): void{
+    public function setHoraArribo(DateTime $horaArribo): void{
         $this->horaArribo = $horaArribo;
     }
-    public function setHoraPartida(date $horaPartida): void{
+    public function setHoraPartida(DateTime $horaPartida): void{
         $this->horaPartida = $horaPartida;
     }
     public function setAsientosTotales(int $asientosTotales): void{
@@ -94,21 +94,19 @@ class Vuelo{
     public function setResponsable(Persona $responsable): void{
         $this->responsable = $responsable;
     }
-    public function __toString(): string {
-        $output = "═══════════════════════════════════\n";
-        $output .= "               VUELO         \n";
-        $output .= "═══════════════════════════════════\n";
-        $output .= "Número: {$this->getNumero()}\n";
-        $output .= "Importe: {$this->getImporte()}\n";
-        $output .= "Fecha: {$this->getFecha()}\n";
-        $output .= "Destino: {$this->getDestino()}\n";
-        $output .= "Hora Arribo: {$this->getHoraArribo()}\n";
-        $output .= "Hora Partida: {$this->getHoraPartida()}\n";
-        $output .= "Asientos Totales: {$this->getAsientosTotales()}\n";
-        $output .= "Asientos Disponibles: {$this->getAsientosDisponibles()}\n";
-        $output .= "Responsable: {$this->getResponsable()->__toString()}\n";
-        $output .= "═══════════════════════════════════\n";
-        return $output;
+    /**En la clase Vuelo se debe implementar el método asignarAsientosDisponibles que recibe por parámetros la cantidad 
+     * de asientos que desean asignarse y de ser necesario actualizando la información del vuelo.
+     * El método retorna verdadero en caso que la asignación puedo concretarse y falso en caso contrario. */
+    public function asignarAsientosDisponibles(int $cantPasajeros): bool
+    {
+        $disponibilidad=false;
+        $asientosDisponibles=$this->getAsientosDisponibles();
+        if($asientosDisponibles >= $cantPasajeros){
+            $disponibilidad=true;
+            $asientosDisponibles-=$cantPasajeros;
+            $this->setAsientosDisponibles($asientosDisponibles);
+        }
+        return $disponibilidad;                
     }
 }
 ?>
