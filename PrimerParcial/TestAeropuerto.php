@@ -29,9 +29,11 @@ $objAeropuerto = new Aeropuerto("Aeropuerto 1", "Calle Aeropuerto 1", [$objAerol
 /**Invocar y visualizar el resultado del método  ventaAutomatica con cantidad de asientos 3 
  * y como destino alguno de los destinos de los vuelos creados. */
 $objVueloAsignado = $objAeropuerto->ventaAutomatica(3, new DateTime("2025-10-01"), "Buenos Aires");
-
-
 echo $objVueloAsignado;
+
+/**Invocar  y visualizar el resultado del método  promedioRecaudadoXAerolinea */
+
+$promedioRecaudado = $objAeropuerto->promedioRecaudadoXAerolinea(1);
 
 ?>
 
