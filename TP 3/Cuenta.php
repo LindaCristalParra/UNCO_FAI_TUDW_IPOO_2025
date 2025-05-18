@@ -1,6 +1,6 @@
 <?php
 class Cuenta {
-    
+
     private int $nroCuenta;
     private float $saldo;
     private Cliente $cliente;
@@ -70,3 +70,4 @@ class Cuenta {
         return $extraido;
     }
 }
+?>
