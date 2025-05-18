@@ -1,8 +1,9 @@
 <?php
 class Cuenta {
-    int $nroCuenta;
-    float $saldo;
-    Cliente $cliente;
+    
+    private int $nroCuenta;
+    private float $saldo;
+    private Cliente $cliente;
 
     public function __construct(int $nroCuenta, float $saldo, Cliente $cliente) {
         $this->nroCuenta = $nroCuenta;
