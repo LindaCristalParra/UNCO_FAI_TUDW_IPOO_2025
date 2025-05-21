@@ -52,9 +52,9 @@ class VagonPasajero extends Vagon
     public function __toString(): string
     {
         $output = parent::__toString() . "\n";
-        $output = "Cantidad Maxima de Pasajeros: " . $this->getCantidadMaxpasajeros() . "\n";
-        $output = "Cantidad de Pasajeros: " . $this->getCantPasajeros() . "\n" .
-        $output = "Peso Promedio de Pasajeros: " . $this->getPesoPromPasajero() . "\n";
+        $output .= "Cantidad Maxima de Pasajeros: " . $this->getCantidadMaxpasajeros() . "\n";
+        $output .= "Cantidad de Pasajeros: " . $this->getCantPasajeros() . "\n" .
+        $output .= "Peso Promedio de Pasajeros: " . $this->getPesoPromPasajero() . "\n";
 
         return $output;
     }

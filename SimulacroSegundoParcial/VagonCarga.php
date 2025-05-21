@@ -52,9 +52,9 @@ class VagonPasajero extends Vagon
     public function __toString(): string
     {
         $output = parent::__toString() . "\n";
-        $output = "Peso Maximo Permitido: " . $this->getPesoMaxPermitido() . "\n";
-        $output = "Peso de la Carga: " . $this->getPesoCarga() . "\n" .
-        $output = "Indice: " . $this->getIndice() . "\n";
+        $output .= "Peso Maximo Permitido: " . $this->getPesoMaxPermitido() . "\n";
+        $output .= "Peso de la Carga: " . $this->getPesoCarga() . "\n" .
+        $output .= "Indice: " . $this->getIndice() . "\n";
 
         return $output;
     }
