@@ -38,37 +38,37 @@ $objFormacion->incorporarVagonFormacion($vagon1);
 $objFormacion->incorporarVagonFormacion($vagonCarga);   
 $objFormacion->incorporarVagonFormacion($vagon);
 
-echo "\nFormación\n";
-echo "-----------\n";
-echo $objFormacion->__tostring();
+// echo "\nFormación\n";
+// echo "-----------\n";
+// echo $objFormacion->__tostring();
 
-// 4. Invocar al método incorporarPasajeroFormacion con el parámetros cantidad de pasajero = 6 y
-// visualizar el resultado.
-$objFormacion->incorporarPasajeroFormacion(6);
-echo $objFormacion->__tostring();
+// // 4. Invocar al método incorporarPasajeroFormacion con el parámetros cantidad de pasajero = 6 y
+// // visualizar el resultado.
+// $objFormacion->incorporarPasajeroFormacion(6);
+// echo $objFormacion->__tostring();
 
-// 5. Realizar un print de los 3 objetos vagones creados.
-echo $vagon1->__tostring();
-echo $vagon2->__tostring();
-echo $vagon3->__tostring();
+// // 5. Realizar un print de los 3 objetos vagones creados.
+// echo $vagon1->__tostring();
+// echo $vagon2->__tostring();
+// echo $vagon3->__tostring();
 
-// 6. Invocar al método incorporarPasajeroFormacion con el parámetros cantidad de pasajero = 14 y
-// visualizar el resultado
-$objFormacion->incorporarPasajeroFormacion(14);
-echo $objFormacion->__tostring();
+// // 6. Invocar al método incorporarPasajeroFormacion con el parámetros cantidad de pasajero = 14 y
+// // visualizar el resultado
+// $objFormacion->incorporarPasajeroFormacion(14);
+// echo $objFormacion->__tostring();
 
-// 7. Realizar un print del objeto locomotora
-echo $objLocomotora->__tostring();
+// // 7. Realizar un print del objeto locomotora
+// echo $objLocomotora->__tostring();
 
-// 8. Invocar al método promedioPasajeroFormacion y visualizar el resultado obtenido.
-echo $objFormacion->promedioPasajerosFormacion();
+// // 8. Invocar al método promedioPasajeroFormacion y visualizar el resultado obtenido.
+// echo $objFormacion->promedioPasajerosFormacion();
 
-// 9. Invocar al método pesoFormacion y visualizar el resultado obtenido
-echo $objFormacion->pesoFormacion();
+// // 9. Invocar al método pesoFormacion y visualizar el resultado obtenido
+// echo $objFormacion->pesoFormacion();
 
-// 10. Realizar un print de los 3 objetos vagones creados.
-echo $vagon1->__tostring();
-echo $vagon2->__tostring();
-echo $vagon3->__tostring();
+// // 10. Realizar un print de los 3 objetos vagones creados.
+// echo $vagon1->__tostring();
+// echo $vagon2->__tostring();
+// echo $vagon3->__tostring();
 
 
