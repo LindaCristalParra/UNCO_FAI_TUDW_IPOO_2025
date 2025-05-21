@@ -68,5 +68,11 @@ class Vagon
             "Ancho: " . $this->ancho . "\n" .
             "Peso del Vagón Vacío: " . $this->pesoVagonVacio . "\n";
     }
+
+    public function calcularPesoVagonVacio(): float
+    {
+        $peso= $this->pesoVagonVacio;
+        return $peso;
+    }
 }
 ?>
