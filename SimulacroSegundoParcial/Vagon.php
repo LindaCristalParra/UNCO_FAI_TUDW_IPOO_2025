@@ -54,11 +54,11 @@ class Vagon
     }
     public function __toString(): string
     {
-
-        $output = "Año de Instalación: " . $this->getAnioInstalacion() . "\n" ;
-        $output = "Largo: ". $this->getLargo() ."\n";        
-        $output = "Ancho: " . $this->getAncho() . "\n" ;
-        $output = "Peso del Vagón Vacío: " . $this->getPesoVagonVacio() . "\n";
+        $output = "\nVagón:\n";
+        $output .= "Año de Instalación: " . $this->getAnioInstalacion() . "\n" ;
+        $output .= "Largo: ". $this->getLargo() ."\n";        
+        $output .= "Ancho: " . $this->getAncho() . "\n" ;
+        $output .= "Peso del Vagón Vacío: " . $this->getPesoVagonVacio() . "\n";
 
         return $output;
     }
