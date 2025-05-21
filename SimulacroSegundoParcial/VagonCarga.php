@@ -1,5 +1,5 @@
 <?php
-class VagonPasajero extends Vagon
+class VagonCarga extends Vagon
 {
     private float $pesoMaxPermitido;
     private float $pesoCarga;
