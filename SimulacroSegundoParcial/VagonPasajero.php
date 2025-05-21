@@ -47,7 +47,7 @@ class VagonPasajero extends Vagon
 
     public function setPesoPromPasajero($pesoPromPasajeros): void
     {
-        $this->pesoPromPasajeros = $pesoPromPasajeros;
+        $this->pesoPromPasajero = $pesoPromPasajeros;
     }
 
     public function __toString(): string
