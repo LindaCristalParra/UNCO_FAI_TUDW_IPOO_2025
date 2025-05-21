@@ -5,7 +5,13 @@ class VagonPasajero extends Vagon
     private int $cantPasajeros;
     private float $pesoPromPasajero;
 
-    public function __construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio, $cantidadMaxpasajeros, $cantPasajeros, $pesoPromPasajero = 50)
+    public function __construct($anioInstalacion, 
+                                $largo, 
+                                $ancho, 
+                                $pesoVagonVacio, 
+                                $cantidadMaxpasajeros, 
+                                $cantPasajeros, 
+                                $pesoPromPasajero = 50)
     {
         parent::__construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio);
         $this->cantidadMaxpasajeros = $cantidadMaxpasajeros;
@@ -48,7 +54,7 @@ class VagonPasajero extends Vagon
         $output = parent::__toString() . "\n";
         $output = "Cantidad Maxima de Pasajeros: " . $this->getCantidadMaxpasajeros() . "\n";
         $output = "Cantidad de Pasajeros: " . $this->getCantPasajeros() . "\n" .
-            $output = "Peso Promedio de Pasajeros: " . $this->getPesoPromPasajero() . "\n";
+        $output = "Peso Promedio de Pasajeros: " . $this->getPesoPromPasajero() . "\n";
 
         return $output;
     }

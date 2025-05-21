@@ -5,7 +5,13 @@ class VagonPasajero extends Vagon
     private float $pesoCarga;
     private float $indice;
 
-    public function __construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio, $pesoMaxPermitido, $pesoCarga, $indice = 0.2)
+    public function __construct($anioInstalacion, 
+                                $largo, 
+                                $ancho, 
+                                $pesoVagonVacio, 
+                                $pesoMaxPermitido, 
+                                $pesoCarga, 
+                                $indice = 0.2)
     {
         parent::__construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio);
         $this->pesoMaxPermitido = $pesoMaxPermitido;
@@ -69,7 +75,6 @@ class VagonPasajero extends Vagon
         }
         return $incorporado;
     }
-
 }
 ?>
 
