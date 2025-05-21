@@ -69,7 +69,7 @@ class Vagon
             "Peso del Vagón Vacío: " . $this->pesoVagonVacio . "\n";
     }
 
-    public function calcularPesoVagonVacio(): float
+    public function calcularPesoVagon(): float
     {
         $peso= $this->pesoVagonVacio;
         return $peso;
