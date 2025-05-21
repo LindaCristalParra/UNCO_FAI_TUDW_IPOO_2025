@@ -65,11 +65,11 @@ class VagonPasajero extends Vagon
         return $pesoVagon;
     }
 
-    public function incorporarPasajeVagon(): bool
+    public function incorporarPasajeVagon(int $pasajero): bool
     {
         $incorporado = false;
         if ($this->getCantPasajeros() < $this->getCantidadMaxpasajeros()) {
-            $this->setCantPasajeros($this->getCantPasajeros() + 1);
+            $this->setCantPasajeros($this->getCantPasajeros() + $pasajero);
             $incorporado = true;
         }
         return $incorporado;
