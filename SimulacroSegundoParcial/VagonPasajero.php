@@ -5,12 +5,12 @@ class VagonPasajero extends Vagon
     private int $cantPasajeros;
     private float $pesoPromPasajero;
 
-    public function __construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio, $cantidadMaxpasajeros, $cantPasajeros, $pesoPromPasajero=50)
+    public function __construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio, $cantidadMaxpasajeros, $cantPasajeros, $pesoPromPasajero = 50)
     {
         parent::__construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio);
         $this->cantidadMaxpasajeros = $cantidadMaxpasajeros;
         $this->cantPasajeros = $cantPasajeros;
-        $this->pesoPromPasajeros = $pesoPromPasajeros;
+        $this->pesoPromPasajeros = $pesoPromPasajero;
     }
 
     public function getCantidadMaxpasajeros(): int
@@ -23,9 +23,9 @@ class VagonPasajero extends Vagon
         return $this->cantPasajeros;
     }
 
-    public function getPesoPromPasajeros(): float
+    public function getPesoPromPasajero(): float
     {
-        return $this->pesoPromPasajeros;
+        return $this->pesoPromPasajero;
     }
 
     public function setCantidadMaxpasajeros($cantidadMaxpasajeros): void
@@ -38,24 +38,24 @@ class VagonPasajero extends Vagon
         $this->cantPasajeros = $cantPasajeros;
     }
 
-    public function setPesoPromPasajeros($pesoPromPasajeros): void
+    public function setPesoPromPasajero($pesoPromPasajeros): void
     {
         $this->pesoPromPasajeros = $pesoPromPasajeros;
     }
 
     public function __toString(): string
     {
-        $output = parent::__toString(). "\n";
-        $output = "Cantidad Maxima de Pasajeros: " . $this->getCantidadMaxpasajeros() . "\n" ;
+        $output = parent::__toString() . "\n";
+        $output = "Cantidad Maxima de Pasajeros: " . $this->getCantidadMaxpasajeros() . "\n";
         $output = "Cantidad de Pasajeros: " . $this->getCantPasajeros() . "\n" .
-        $output = "Peso Promedio de Pasajeros: " . $this->getPesoPromPasajeros() . "\n";
+            $output = "Peso Promedio de Pasajeros: " . $this->getPesoPromPasajero() . "\n";
 
         return $output;
     }
 
     public function calcularPesoVagon(): float
     {
-        $pesoVagon = $this->getPesoVagonVacio() + ($this->getPesoPromPasajeros() * $this->getCantPasajeros());
+        $pesoVagon = $this->getPesoVagonVacio() + ($this->getPesoPromPasajero() * $this->getCantPasajeros());
         return $pesoVagon;
     }
 
@@ -65,9 +65,9 @@ class VagonPasajero extends Vagon
         if ($this->getCantPasajeros() < $this->getCantidadMaxpasajeros()) {
             $this->setCantPasajeros($this->getCantPasajeros() + 1);
             $incorporado = true;
-        } 
+        }
         return $incorporado;
-    }       
+    }
 
 }
 

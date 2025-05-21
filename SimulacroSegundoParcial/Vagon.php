@@ -44,34 +44,37 @@ class Vagon
         return $this->pesoVagonVacio;
     }
 
-    public function setAnioInstalacion($anioInstalacion):void
+    public function setAnioInstalacion($anioInstalacion): void
     {
         $this->anioInstalacion = $anioInstalacion;
     }
 
-    public function setLargo($largo):void
+    public function setLargo($largo): void
     {
         $this->largo = $largo;
     }
-    public function setAncho($ancho):void
+    public function setAncho($ancho): void
     {
         $this->ancho = $ancho;
     }
-    public function setPesoVagonVacio($pesoVagonVacio):void
+    public function setPesoVagonVacio($pesoVagonVacio): void
     {
         $this->pesoVagonVacio = $pesoVagonVacio;
     }
     public function __toString(): string
     {
-        return "Año de Instalación: " . $this->anioInstalacion . "\n" .
-            "Largo: " . $this->largo . "\n" .
-            "Ancho: " . $this->ancho . "\n" .
-            "Peso del Vagón Vacío: " . $this->pesoVagonVacio . "\n";
+
+        $output = "Año de Instalación: " . $this->getAnioInstalacion() . "\n" ;
+        $output = "Largo: ". $this->getLargo() ."\n";        
+        $output = "Ancho: " . $this->getAncho() . "\n" ;
+        $output = "Peso del Vagón Vacío: " . $this->getPesoVagonVacio() . "\n";
+
+        return $output;
     }
 
     public function calcularPesoVagon(): float
     {
-        $peso= $this->pesoVagonVacio;
+        $peso = $this->pesoVagonVacio;
         return $peso;
     }
 }
