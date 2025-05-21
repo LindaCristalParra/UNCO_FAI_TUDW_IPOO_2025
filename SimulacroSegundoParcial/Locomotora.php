@@ -1,4 +1,4 @@
-<?
+<?php
 class Locomotora {
     private float $peso;
     private float $velocidadmax;
