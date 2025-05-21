@@ -1,4 +1,4 @@
-<?
+<?php
 class Formacion
 {
     private Locomotora $objLocomotora;

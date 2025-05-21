@@ -1,4 +1,5 @@
 <?php
+require_once "Vagon.php";
 class VagonPasajero extends Vagon
 {
     private int $cantidadMaxpasajeros;

@@ -3,6 +3,7 @@ require_once "Locomotora.php";
 require_once "VagonPasajero.php";
 require_once "VagonCarga.php";
 require_once "Vagon.php";
+require_once "Formacion.php";
 
 // 1. Se crea un objeto locomotora con un peso de 188 toneladas y una velocidad de 140 km/h.
 $objLocomotora = new Locomotora(188000, 140);
