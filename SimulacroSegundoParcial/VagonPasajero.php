@@ -17,7 +17,7 @@ class VagonPasajero extends Vagon
         parent::__construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio);
         $this->cantidadMaxpasajeros = $cantidadMaxpasajeros;
         $this->cantPasajeros = $cantPasajeros;
-        $this->pesoPromPasajeros = $pesoPromPasajero;
+        $this->pesoPromPasajero = $pesoPromPasajero;
     }
 
     public function getCantidadMaxpasajeros(): int
