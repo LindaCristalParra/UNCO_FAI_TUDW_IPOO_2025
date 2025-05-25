@@ -11,12 +11,12 @@ class VagonCarga extends Vagon
                                 $pesoVagonVacio, 
                                 $pesoMaxPermitido, 
                                 $pesoCarga, 
-                                $indice = 0.2)
+                                )
     {
         parent::__construct($anioInstalacion, $largo, $ancho, $pesoVagonVacio);
         $this->pesoMaxPermitido = $pesoMaxPermitido;
         $this->pesoCarga = $pesoCarga;
-        $this->indice = $indice;
+        $this->indice = 0.2; // Valor por defecto
     }
 
     public function getPesoMaxPermitido(): float
@@ -29,7 +29,7 @@ class VagonCarga extends Vagon
         return $this->pesoCarga;
     }
 
-    public function getIndice(): int
+    public function getIndice(): float
     {
         return $this->indice;
     }
@@ -51,8 +51,8 @@ class VagonCarga extends Vagon
 
     public function __toString(): string
     {
-        $output = parent::__toString() . "\n";
-        $output .= "Peso Maximo Permitido: " . $this->getPesoMaxPermitido() . "\n";
+        $output = "Vagón Carga:\n";
+        $output = "Peso Maximo Permitido: " . $this->getPesoMaxPermitido() . "\n";
         $output .= "Peso de la Carga: " . $this->getPesoCarga() . "\n" .
         $output .= "Indice: " . $this->getIndice() . "\n";
 

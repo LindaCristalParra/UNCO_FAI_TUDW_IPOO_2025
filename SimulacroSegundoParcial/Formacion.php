@@ -9,7 +9,7 @@ class Formacion
     {
         $this->objLocomotora = $objLocomotora;
         $this->cantMaxVagones = $cantMaxVagones;
-        $this->colVagones;
+        $this->colVagones = $colVagones;
     }
 
     public function getObjLocomotora(): Locomotora
@@ -78,7 +78,6 @@ class Formacion
                     $contador++;
                 }
             }
-
         } while ($contador <= $cantVagones && $incorporado == false);
 
         return $incorporado;
@@ -135,7 +134,6 @@ class Formacion
             $pesoFormacion += $vagon->calcularPesoVagon();
         }
         return $pesoFormacion;
-
     }
 
     // Implementar el método retornarVagonSinCompletar el cual retorna el primer vagón de la formación que
@@ -159,7 +157,4 @@ class Formacion
 
         return $vagonSinCompletar;
     }
-
-
 }
-?>
