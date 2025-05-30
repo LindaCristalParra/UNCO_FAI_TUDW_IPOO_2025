@@ -31,8 +31,8 @@ class ContratoWeb extends Contrato {
         return $output;
     }
 
-    public function calcularCosto(): float {
-        $costoBase = $this->getCosto();
+    public function calcularImporte(): float {
+        $costoBase = parent::calcularImporte();
         $descuento = $costoBase * $this->porcentajeDescuento;
         return $costoBase - $descuento;
     }
