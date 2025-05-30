@@ -1,6 +1,7 @@
 <?php
 class canal
 {
+    private int $idContrato;
     private DateTime $fechaInicio;
     private DateTime $fechaVencimiento;
     private Plan $planContrato;
@@ -9,8 +10,9 @@ class canal
     private bool $renueva;
     private Cliente $cliente;
 
-    public function __construct(DateTime $fechaInicio, DateTime $fechaVencimiento, Plan $planContrato, string $estado, float $costo, bool $renueva, Cliente $cliente)
+    public function __construct(int $idContrato, DateTime $fechaInicio, DateTime $fechaVencimiento, Plan $planContrato, string $estado, float $costo, bool $renueva, Cliente $cliente)
     {
+        $this->idContrato = $idContrato;
         $this->fechaInicio = $fechaInicio;
         $this->fechaVencimiento = $fechaVencimiento;
         $this->planContrato = $planContrato;
@@ -18,6 +20,11 @@ class canal
         $this->costo = $costo;
         $this->renueva = $renueva;
         $this->cliente = $cliente;
+    }
+
+    public function getIdContrato(): int
+    {
+        return $this->idContrato;
     }
 
     public function getFechaInicio(): DateTime
@@ -53,6 +60,11 @@ class canal
     public function getCliente(): Cliente
     {
         return $this->cliente;
+    }
+
+    public function setIdContrato(int $idContrato): void
+    {
+        $this->idContrato = $idContrato;
     }
 
     public function setFechaInicio(DateTime $fechaInicio): void
