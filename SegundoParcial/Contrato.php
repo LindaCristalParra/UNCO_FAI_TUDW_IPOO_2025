@@ -25,7 +25,7 @@ class canal
         return $this->fechaInicio;
     }
 
-    public function getFechaVencimiento(): DateTime     
+    public function getFechaVencimiento(): DateTime
     {
         return $this->fechaVencimiento;
     }
@@ -101,9 +101,45 @@ class canal
         $output .= "Estado: " . $this->getestado() . "\n";
         $output .= "Costo: $" . number_format($this->getCosto(), 2) . "\n";
         $output .= "Renueva Automáticamente: " . ($this->getrenueva() ? 'Sí' : 'No') . "\n";
-        $output .= "Cliente: " . $this->getCliente() . "\n"; 
+        $output .= "Cliente: " . $this->getCliente() . "\n";
         $output .= "═══════════════════════════════════\n";
         return $output;
+    }
+
+    public function actualizarEstadoContrato()
+    {
+        //(al día, moroso, suspendido, finalizado) 
+        // Un contrato se considera en estado moroso cuando su fecha de vencimiento ha sido superada, 
+        // en caso de que pasen 10 días al vencimiento el estado cambiará de moroso a suspendido; 
+        // caso contrario el contrato se encuentra al día. 
+        // Antes de que un cliente realice un pago se debe verificar su estado.
+
+        $dias = $this->diasContratoVencido($this);
+
+        if ($dias <= 0) {
+            $this->setEstado('al día');
+        } elseif ($dias > 0 && $dias <= 10) {
+            $this->setEstado('moroso');
+        } elseif ($dias > 10 && $dias <= 30) {
+            $this->setEstado('suspendido');
+        } else {
+            $this->setEstado('finalizado');
+        }
+    }
+
+    private function diasContratoVencido($this): int
+    {
+        $diasVencido = 0;
+
+        //calcula dias vencidos
+        $fechaActual = new DateTime();
+        $fechaVencimiento = $$this->getFechaVencimiento();
+        if ($fechaActual > $fechaVencimiento) {
+            $intervalo = $fechaActual->diff($fechaVencimiento);
+            $diasVencido = $intervalo->days;
+        }
+
+        return $diasVencido;
     }
 
 }
