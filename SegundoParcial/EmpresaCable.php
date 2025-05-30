@@ -103,16 +103,17 @@ class EmpresaCable
         // Si no existe un plan con los mismos canales y MG, lo agrega a la colección
         if (!$existePlan) {
             $this->colPlanes[] = $plan;
+            $this->setColPlanes($this->colPlanes);
         }
     }
 
     // Implementar la función BuscarContrato que  recibe un tipo y numero de documento 
     // correspondiente a un cliente y retorna el contrato que tiene el cliente con la empresa. 
     // Si no existe ningún contrato el método retorna un valor nulo.
-    public function buscarContrato(string $tipo, int $nro): void
+    public function buscarContrato(string $tipo, int $nro): Contrato
     {
         $contratoEncontrado = false;
-        $contarto= null;
+        $contrato = null;
         $cantContratos = count($this->getColContratos());
         $contratosVigentes = $this->getColContratos();
         $i = 0;
@@ -123,7 +124,7 @@ class EmpresaCable
                 $contratosVigentes[$i]->getCliente()->getNroDocumento() === $nro
             ) {
                 $contratoEncontrado = true;
-                $contarto = $contratosVigentes[$i];
+                $contrato = $contratosVigentes[$i];
             }
             $i++;
         }
@@ -139,25 +140,18 @@ class EmpresaCable
     // en caso de existir y encontrarse activo se debe dar de baja. 
     // Por política de la empresa, solo existe la posibilidad de tener un contrato activo 
     // con un cliente determinado.
-    public function incorporarContrato(Contrato $contrato): void
+    public function incorporarContrato(Plan $plan, Cliente $objCliente, DateTime $fechaIni, DateTime $fechaVen, bool $web): void
     {
-        // Verifica si el contrato ya existe en la colección      
+        $contratos = $this->getColContratos();
+        // Verifica si el cliente ya tiene contrato activo
+        $contratoExistente = $this->buscarContrato($objCliente->getTipoDocumento(), $objCliente->getNroDocumento());
+        if (!($contratoExistente->getEstado() === 'activo')) {
+            $nuevoContrato = new Contrato($fechaIni, $fechaVen, $plan, 'activo', 0, false, $objCliente);
 
-        $cantContratos = count($this->getColContratos());
-        $contratosVigentes = $this->getColContratos();
-        $i = 0;
-        $existeContrato = false;
-        while ($i < $cantContratos && !$existeContrato) {
-            if (
-                $contratosVigentes[$i]->getIdContrato() === $contrato->getIdContrato()
-            ) {
-                $existePlan = true;
-            }
-            $i++;
+            $this->contratos[] = $nuevoContrato;
+            $this->setColContratos($this->contratos);
         }
-        // Si no existe, lo agrega a la colección
-        if (!$existeContrato) {
-             $this->colContratos[] = $contrato;
+
     }
 
     // Implementar la función  retornarPromImporteContratos que 
