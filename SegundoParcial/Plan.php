@@ -6,11 +6,11 @@ class Plan {
     private float $importe;
     private bool $mgIncluido;
 
-    public function __construct(int $codigo, array $colCanales, float $importe, bool $mgIncluido) {
+    public function __construct(int $codigo, array $colCanales, float $importe) {
         $this->codigo = $codigo;
         $this->colCanales = $colCanales;
         $this->importe = $importe;
-        $this->mgIncluido = $mgIncluido;
+        $this->mgIncluido = 100; // Por defecto, el MG está incluido
     }
 
     public function getCodigo(): int {
@@ -54,7 +54,7 @@ class Plan {
         $output .= "Canales:\n";
         $output .= "-----------------------------------\n"; 
         $output .= $this->convertirAstring($this->getColCanales()) . "\n";
-        $output .= "¿Incluye MG?: " . ($this->getUsIncluido() ? 'Sí' : 'No') . "\n";
+        $output .= "¿Incluye MG?: " . ($this->getMgIncluido() ? 'Sí' : 'No') . "\n";
 
         return $output;
     }
@@ -73,3 +73,5 @@ class Plan {
         return $output;
     }
 }
+
+?>
