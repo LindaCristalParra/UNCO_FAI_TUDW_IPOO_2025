@@ -43,9 +43,14 @@ class Canal
     }
     public function __toString(): string
     {
-        return "Tipo de Canal: " . $this->getTipoCanal() . "\n" .
-            "Importe: " . $this->getImporte() . "\n" .
-            "¿Es HD?: " . ($this->getEsHD() ? 'Sí' : 'No') . "\n";
+        $output = "═══════════════════════════════════\n";
+        $output .= "          CANAL         \n";
+        $output .= "═══════════════════════════════════\n";
+        $output .= "Tipo de Canal: " . $this->getTipoCanal() . "\n";
+        $output .= "Importe: " . $this->getImporte() . "\n";
+        $output .= "¿Es HD?: " . ($this->getEsHD() ? 'Sí' : 'No') . "\n";
+        $output .= "═══════════════════════════════════\n";
+        return $output;
     }
 }
 
