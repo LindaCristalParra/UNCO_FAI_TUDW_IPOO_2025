@@ -150,9 +150,12 @@ class canal
             // Si el contrato está moroso, se aplica un recargo del 10%
             $recargo = $importePlan * 0.10;
             $importePlan = +$recargo;
+        } elseif ($this->getEstado() === 'suspendido' || $this->getEstado() === 'finalizado') {
+            // Si el contrato está suspendido o finalizado, no se cobra nada
+            $importePlan = 0;
         }
-        $this->setCosto($importePlan);
-
+        $this->setCosto($importePlan);       
+        
         return $importePlan;
 
     }
