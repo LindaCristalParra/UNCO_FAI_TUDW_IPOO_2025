@@ -1,5 +1,4 @@
 <?php 
-
 require_once 'Contrato.php';
 class ContratoWeb extends Contrato {
 

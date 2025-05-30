@@ -70,13 +70,57 @@ class EmpresaCable {
         return $output;
     }
 
+    // Implementar la función incorporarPlan que incorpora a la colección de planes un nuevo plan 
+    // siempre y cuando no haya un plan con los mismos canales y los mismos MG 
+    // (en caso de que el plan incluyera).
     public function incorporarPlan (Plan $plan): void {
 
 
         $this->colPlanes[] = $plan;
     }   
 
+    // Implementar la función BuscarContrato que  recibe un tipo y numero de documento 
+    // correspondiente a un cliente y retorna el contrato que tiene el cliente con la empresa. 
+    // Si no existe ningún contrato el método retorna un valor nulo.
     public function buscarContrato(int $id):void {
         // Busca un contrato por su ID y lo retorna con while recorrido parcial
     }
+
+    // Implementar la función incorporarContrato: 
+    // que recibe por parámetro el plan, una referencia al cliente, 
+    // la fecha de inicio y de vencimiento del mismo y si se trata de un contrato realizado en la empresa 
+    // o vía web (si el valor del parámetro es True se trata de un contrato realizado vía web). 
+    // El método corrobora que no exista un contrato previo con el cliente, 
+    // en caso de existir y encontrarse activo se debe dar de baja. 
+    // Por política de la empresa, solo existe la posibilidad de tener un contrato activo 
+    // con un cliente determinado.
+    public function incorporarContrato(Contrato $contrato): void {
+        // Verifica si el contrato ya existe en la colección
+        foreach ($this->colContratos as $c) {
+            if ($c->getId() === $contrato->getId()) {
+                throw new Exception("El contrato ya existe.");
+            }
+        }
+        // Si no existe, lo agrega a la colección
+        $this->colContratos[] = $contrato;
+    }
+
+    // Implementar la función  retornarPromImporteContratos que 
+    // recibe por parámetro el código de un plan 
+    // y retorna el promedio de los importes de los contratos realizados usando ese plan.
+
+    public function retornarPromImporteContratos():float{
+        $promedio=0;
+        return $promedio;
+    }
+
+    // Implementar la función pagarContrato: que recibe como parámetro el código de un contrato, 
+    // actualiza el estado del contrato y retorna el importe final que debe ser abonado por el cliente.
+
+    public function pagarContrato(int $codigoContrato): float {
+
+        $importe=0;
+        return $importe;
+ 
+    }   
 }
