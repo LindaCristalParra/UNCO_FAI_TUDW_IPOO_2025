@@ -142,6 +142,21 @@ class canal
         return $diasVencido;
     }
 
+    public function calcularImporte(): float
+    {
+        // El costo del contrato es el costo del plan contratado
+        $importePlan = $this->getPlanContrato()->getImporte();
+        if ($this->getEstado() === 'moroso') {
+            // Si el contrato está moroso, se aplica un recargo del 10%
+            $recargo = $importePlan * 0.10;
+            $importePlan = +$recargo;
+        }
+        $this->setCosto($importePlan);
+
+        return $importePlan;
+
+    }
+
 }
 
 ?>
